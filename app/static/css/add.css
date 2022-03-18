@@ -1,0 +1,20 @@
+body {
+    background-image: url("/static/coffee-notebooks.jpeg");
+    /* background-repeat: no-repeat; */
+    background-size: 100%, 100%;
+    color: white;
+}
+
+.heading {
+    font-family: 'Arial';
+    margin-left: 35px;
+    margin-bottom: 25px;
+    margin-top: 15px;
+    color: white;
+    text-shadow: 1px 0px 20px #4e4655;
+    -webkit-transition: 1s linear 0s;
+    -moz-transition: 1s linear 0s;
+    -o-transition: 1s linear 0s;
+    transition: 1s linear 0s;
+    outline: 0 none;
+}

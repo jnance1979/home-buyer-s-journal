@@ -1,0 +1,6 @@
+venv
+virtualenv
+.env
+*.pyc
+__pychache__
+migrations

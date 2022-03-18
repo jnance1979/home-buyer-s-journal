@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+        {% block title %}
+        <title>Register</title>
+        {% endblock %}
+
+{% block content %}
+<h1>register</h1>
+<hr>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <!-- Login Form -->
+        <form action="{{ url_for('register') }}" method="POST">
+            <input type="name" id="login" class="fadeIn second" name="name" placeholder="name">
+            <input type="email" id="login" class="fadeIn second" name="email" placeholder="e-mail">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+            <input type="password" id="password" class="fadeIn third" name="password2" placeholder="confirm password">
+            <input type="submit" class="fadeIn fourth" value="Register">
+        </form>
+
+    </div>
+</div>
+{% endblock %}

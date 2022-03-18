@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+        {% block title %}
+        <title>Journal</title>
+        {% endblock %}
+
+        {% block head %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/view.css') }}">
+        {% endblock %}
+
+        {% block header %}
+        <h1 class="heading">{{ current_user.name }}'s saved homes</h1>
+        {% endblock %}
+
+{% block content %}
+
+<div class="col-12">
+    <!-- <div class="user">
+        <h1><strong>{{ current_user.name }}</strong></h1>
+    </div> -->
+</div>
+<!-- <h2>your saved homes:</h2>
+
+<hr> -->
+
+<div class="row">
+
+    {% for h in homes %}
+    <div class="card col-3">
+        <h4 style="text-align:center" class="card-title">{{ h.address }}</h4>
+        <div class="card-body">
+            <p class="card-text">{{ h.description }}</p>
+            <p class="card-text">{{ h.nickname }}</p>
+            <p class="card-text">Bedrooms: {{ h.bedrooms }}</p>
+            <p class="card-text">Bathrooms: {{ h.bathrooms }}</p>
+            <p class="card-text">{{ h.impressions }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div>
+    <a href="{{ url_for('add') }}"><button style="margin-top: 20px;" type="button"
+            class="btn btn-primary btn-lg">Add a New Home</button></a>
+</div>
+
+{% endblock %}
