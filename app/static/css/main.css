@@ -1,5 +1,5 @@
 body {
-    background-image: url("/static/house_in_field.jpg");
+    background-image: url("/static/coffee-journal.jpg");
     background-repeat: no-repeat;
     background-size: 100%, 100%;
 }
@@ -7,7 +7,7 @@ body {
 button {
     font-family: 'Arial';
     color: white;
-    text-shadow: 1px 0px 20px #ecf572;
+    text-shadow: 1px 0px 20px #edf0cc;
     -webkit-transition: 1s linear 0s;
     -moz-transition: 1s linear 0s;
     -o-transition: 1s linear 0s;

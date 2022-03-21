@@ -34,13 +34,18 @@
             <p class="card-text">Bedrooms: {{ h.bedrooms }}</p>
             <p class="card-text">Bathrooms: {{ h.bathrooms }}</p>
             <p class="card-text">{{ h.impressions }}</p>
+            <p class="card-text">Cook County Property Pin: {{ h.dashed_pin }}</p>
+            <p class="card-text">Estimated Annual Property Taxes: ${{ h.taxes }}</p>
+            <a href="https://www.cookcountyassessor.com/pin/{{ h.pin }}" target="_blank">Click for property details.</a>
         </div>
+        <a href="{{ url_for('remove', pin=h.pin) }}"><button style="margin-bottom: 20px; margin-left: 20px;" type="button" class="btn btn-secondary btn-lg">Remove this Home</button></a>
+    
     </div>
     {% endfor %}
 </div>
 <div>
     <a href="{{ url_for('add') }}"><button style="margin-top: 20px;" type="button"
-            class="btn btn-primary btn-lg">Add a New Home</button></a>
+            class="btn btn-secondary btn-lg">Add a New Home</button></a>
 </div>
 
 {% endblock %}
