@@ -4,6 +4,7 @@ from flask_login import current_user, login_user, logout_user
 from app.models import User, Property
 from app.map import create_map
 from app.taxes import property_characteristics
+from app.calculator import get_payment
 from app.mail import send_mail
 import time
 import requests
@@ -71,14 +72,7 @@ def add():
             flash('no record for that address - please try again', 'warning')
             return redirect(request.referrer)
         else:     
-            time.sleep( 2 ) 
-        # home = Property.query.filter_by(address=data.get('address')).first()
-        # if user is not None:
-        #     flash('an account associated with your e-mail is already on file', 'warning')
-        #     return redirect(request.referrer)
-        # if data.get('password') != data.get('password2'):
-        #     flash('passwords do not match!', 'warning')
-        #     return redirect(request.referrer)
+            time.sleep( 1 ) 
         data = request.form
         new_home = Property(
             address=data.get('address'),
@@ -89,6 +83,7 @@ def add():
             pin = tax_dict['pin'],
             dashed_pin = tax_dict['dashed_pin'],
             taxes = tax_dict['taxes'],
+            payment = 0.0,
             user_id=current_user.id,
         )
         db.session.add(new_home)
@@ -104,6 +99,7 @@ def view():
     collection = [] 
     for h in homes:
             homes_dict = {
+            'id': h.id,
             'address': h.address,    
             'nickname': h.nickname,
             'bedrooms': h.bedrooms,
@@ -112,6 +108,7 @@ def view():
             'pin': h.pin,
             'dashed_pin': h.dashed_pin,
             'taxes': h.taxes,
+            'payment': h.payment
             }
             collection.append(homes_dict)
     context = {
@@ -120,13 +117,13 @@ def view():
     return render_template('view.html', **context)
 
 
-@app.route('/view/remove/<pin>')
-def remove(pin):
-    home_to_remove = Property.query.filter_by(pin=pin).filter_by(user_id=current_user.id).first()
+@app.route('/view/remove/<address>')
+def remove(address):
+    home_to_remove = Property.query.filter_by(address=address).filter_by(user_id=current_user.id).first()
     db.session.delete(home_to_remove)
     db.session.commit()
     flash(f'Home removed from your journal.', 'success')    
-    return render_template('home.html') 
+    return redirect(request.referrer) 
 
 
 @app.route('/map_request', methods=['GET', 'POST'])
@@ -137,8 +134,82 @@ def map():
             flash('no record for that address - please try again', 'warning')
             return redirect(request.referrer)    
         else:       
-            time.sleep( 2 )
+            time.sleep( 1 )
             return render_template('final_map.html')
     return render_template('map_request.html')
 
-    
+@app.route('/property/<id>', methods=['GET', 'POST'])
+def home_single(id):
+    p = Property.query.filter_by(id=id).filter_by(user_id=current_user.id).first()
+    print(p.id)
+    context = {
+            'id': p.id,
+            'address': p.address,    
+            'nickname': p.nickname,
+            'bedrooms': p.bedrooms,
+            'bathrooms': p.bathrooms,
+            'impressions': p.impressions,
+            'pin': p.pin,
+            'dashed_pin': p.dashed_pin,
+            'taxes': p.taxes
+    }
+    return render_template('property.html', **context)
+
+
+
+# @app.route('/property/<id>')
+# def home_single(id):
+#     property = Property.query.filter_by(id=id).filter_by(user_id=current_user.id)
+#     print(property)
+#     collection = [] 
+#     for p in property:
+#             property_dict = {
+#             'id': p.id,
+#             'address': p.address,    
+#             'nickname': p.nickname,
+#             'bedrooms': p.bedrooms,
+#             'bathrooms': p.bathrooms,
+#             'impressions': p.impressions,
+#             'pin': p.pin,
+#             'dashed_pin': p.dashed_pin,
+#             'taxes': p.taxes,
+#             }
+#             collection.append(property_dict)
+#     context = {
+#         'property': collection
+#     }
+#     return render_template('property.html', **context)
+
+
+
+
+@app.route('/calculator/<taxes>/<id>', methods=['GET', 'POST'])
+def calculator(taxes, id):
+    id=id
+    taxes=taxes
+    if request.method == 'POST':
+        try:
+            price = float((request.form.get('price')).replace(',',''))
+            print(price)
+            down_payment = float((request.form.get('down_payment')).replace(',',''))
+            principal = (price - down_payment)
+            rate = float(request.form.get('rate'))/100
+            term = float(request.form.get('term'))
+            dues = float((request.form.get('dues')).replace(',',''))
+            print(term)
+            taxes = float(taxes)
+            print(taxes)
+            monthly_payment = round(get_payment(principal, rate, term, dues, taxes), 2)
+            print (monthly_payment)
+            context = {
+                'payment': monthly_payment 
+            }
+            pay = Property.query.filter_by(id=id).filter_by(user_id=current_user.id).first()
+            pay.payment = monthly_payment
+            db.session.commit()
+            flash(f'Estimated payment of ${monthly_payment} added to {pay.address}!', 'success')
+            return render_template('calculator.html', **context)
+        except:
+            flash('error - please try again', 'warning')
+            return redirect(request.referrer)
+    # return render_template('property.html')

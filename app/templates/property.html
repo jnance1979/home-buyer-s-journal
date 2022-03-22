@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>Mortgage Calculator</title>
+{% endblock %}
+
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/calculate.css') }}">
+    {% endblock %}
+
+{% block content %}
+    <div class="card col-3">
+         <h4 style="text-align:center" class="card-title">{{ address }}</h4>
+        <!--<div class="card-body">
+            <p class="card-text">{{ description }}</p>
+            <p class="card-text">{{ nickname }}</p>
+            <p class="card-text">Bedrooms: {{ bedrooms }}</p>
+            <p class="card-text">Bathrooms: {{ bathrooms }}</p>
+            <p class="card-text">{{ impressions }}</p>
+            <p class="card-text">Cook County Property Pin: {{ dashed_pin }}</p>
+            <p class="card-text">Estimated Annual Property Taxes: ${{ taxes }}</p>
+            <a href="https://www.cookcountyassessor.com/pin/{{ pin }}" target="_blank">Click for property details.</a>
+        </div>
+        <a href="{{ url_for('remove', address=address) }}"><button style="margin-bottom: 20px; margin-left: 20px;"
+                type="button" class="btn btn-secondary btn-lg">Remove this Home</button></a> -->
+    </div>
+
+    </div>
+    <p>Do not leave any fields blank. If a field is not applicable, enter 0.</p>
+<div class="col-6">
+    <form action="{{ url_for('calculator', taxes=taxes, id=id) }}" method="POST">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Purchase Price</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="price"
+                placeholder="250,000">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Down Payment Amount</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="down_payment"
+                placeholder="25,000">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Interest Rate Percentage</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="rate"
+                placeholder="3.5">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Loan Term (in years)</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="term"
+                placeholder="30">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Monthly HOA Dues (if applicable)</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="dues" placeholder="200">
+        </div>
+        <button href="{{ url_for('calculator', taxes=taxes, id=id) }}" type="submit" class="btn btn-secondary btn-lg"> Submit </button>
+    </form>
+</div>
+    
+{% endblock %}
+
+    <!-- {% for p in property %}
+    <div class="card col-3">
+        <h4 style="text-align:center" class="card-title">{{ p.address }}</h4>
+        <div class="card-body">
+            <p class="card-text">{{ p.description }}</p>
+            <p class="card-text">{{ p.nickname }}</p>
+            <p class="card-text">Bedrooms: {{ p.bedrooms }}</p>
+            <p class="card-text">Bathrooms: {{ p.bathrooms }}</p>
+            <p class="card-text">{{ p.impressions }}</p>
+            <p class="card-text">Cook County Property Pin: {{ p.dashed_pin }}</p>
+            <p class="card-text">Estimated Annual Property Taxes: ${{ p.taxes }}</p>
+            <a href="https://www.cookcountyassessor.com/pin/{{ p.pin }}" target="_blank">Click for property details.</a>
+        </div>
+        <a href="{{ url_for('remove', address=p.address) }}"><button style="margin-bottom: 20px; margin-left: 20px;"
+                type="button" class="btn btn-secondary btn-lg">Remove this Home</button></a>
+    
+    </div>
+    
+    </div>
+    <div class="col-6">
+        <form action="{{ url_for('calculator', taxes=p.taxes) }}" method="POST">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Purchase Price</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="price" placeholder="250,000">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Down Payment Amount</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="down_payment"
+                    placeholder="25,000">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Interest Rate Percentage</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="rate" placeholder="3.5">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Loan Term (in years)</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="term" placeholder="30">
+            </div>
+            <button href="{{ url_for('calculator', taxes=p.taxes) }}" type="submit" class="btn btn-secondary btn-lg"> Submit
+            </button>
+        </form>
+        {% endfor %}
+    </div>
+    <div class="card col-3">
+        <h4 style="text-align:center" class="card-title">Monthly Payment</h4>
+        <div class="card-body">
+            <p class="card-text">${{ payment }}</p>
+        </div>
+    </div> -->

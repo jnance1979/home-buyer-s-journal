@@ -41,11 +41,12 @@ class Property(db.Model):
     impressions = db.Column(db.String(500))
     pin = db.Column(db.String(30))
     dashed_pin = db.Column(db.String(30))
-    taxes = db.Column(db.Float)    
+    taxes = db.Column(db.Float)
+    payment = db.Column(db.Float)   
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self, address, nickname, bedrooms, bathrooms, impressions, pin, dashed_pin, taxes, user_id):
+    def __init__(self, address, nickname, bedrooms, bathrooms, impressions, pin, dashed_pin, taxes, payment, user_id):
         super().__init__()
         self.address = address
         self.nickname = nickname
@@ -54,7 +55,8 @@ class Property(db.Model):
         self.impressions = impressions
         self.pin = pin
         self.dashed_pin = dashed_pin
-        self.taxes = taxes       
+        self.taxes = taxes     
+        self.payment = payment  
         self.user_id = user_id
 
     def __repr__(self):

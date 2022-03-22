@@ -2,7 +2,7 @@
 
 {% block content %}
         {% if not current_user.is_anonymous %}
-        <h1>home buyer's journal</h1>
+        <h1>Chicago Home Buyer's Journal</h1>
         <hr>
         <div class="col-3">
         <a href="{{ url_for('add') }}"><button style="margin-bottom: 10px;" type="button" class="btn btn-block btn-secondary btn-lg">Add a New Home</button></a>
@@ -13,7 +13,5 @@
         {% else %}
         <h3>Please log in or register to create a journal</h3>
         {% endif %}
-{% endblock %}
 
-<!-- <a style="margin-bottom: 10px;" class="btn btn-warning" href="{{ url_for('remove_hero', name=h.name) }}">remove from
-        your collection</a> -->
+{% endblock %}

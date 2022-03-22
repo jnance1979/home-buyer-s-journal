@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>Mortgage Calculator</title>
+{% endblock %}
+
+{% block content %}
+
+    <div class="card col-3">
+        <h4 style="text-align:center" class="card-title">Monthly Payment</h4>
+        <div class="card-body">
+            <p class="card-text">${{ payment }}</p>
+        </div>
+    </div>
+{% endblock %}

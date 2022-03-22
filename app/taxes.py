@@ -38,8 +38,6 @@ def property_characteristics(user_address):
         lon = geometry['lng']
         print(num)
         print(street)
-        # print(split_unit)
-        # print(unit)
 
     else:
         return False
@@ -69,7 +67,7 @@ def property_characteristics(user_address):
                 
             else:
                 pin = '17162160090000'
-                d_pin = 'no data available'
+                d_pin = 'not available'
                 both = [pin, d_pin]                
             return both
         except:

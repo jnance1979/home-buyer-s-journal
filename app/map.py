@@ -141,7 +141,7 @@ def create_map(user_address):
                             radius=15,
                             weight=10).add_to(this_map)
     
-        fire_df.apply(plotDot, axis = 1)
+    fire_df.apply(plotDot, axis = 1)
 
 
     def plotDot(point):
@@ -151,7 +151,7 @@ def create_map(user_address):
                             radius=15,
                             weight=10).add_to(this_map)
 
-        lib_df.apply(plotDot, axis = 1)
+    lib_df.apply(plotDot, axis = 1)
 
 
     def plotDot(point):
@@ -161,7 +161,7 @@ def create_map(user_address):
                             radius=5,
                             weight=10).add_to(this_map)
 
-        cafe_df.apply(plotDot, axis = 1)
+    cafe_df.apply(plotDot, axis = 1)
 
 
 

@@ -1,0 +1,6 @@
+body {
+    background: url("/static/calculator.jpeg") repeat center center fixed;
+    width: 100%;
+    height: 344px;
+    background-size: contain;
+}

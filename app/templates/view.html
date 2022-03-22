@@ -36,15 +36,20 @@
             <p class="card-text">{{ h.impressions }}</p>
             <p class="card-text">Cook County Property Pin: {{ h.dashed_pin }}</p>
             <p class="card-text">Estimated Annual Property Taxes: ${{ h.taxes }}</p>
+            <p class="card-text">Estimated Monthly Payment: ${{ h.payment }}</p>
             <a href="https://www.cookcountyassessor.com/pin/{{ h.pin }}" target="_blank">Click for property details.</a>
         </div>
-        <a href="{{ url_for('remove', pin=h.pin) }}"><button style="margin-bottom: 20px; margin-left: 20px;" type="button" class="btn btn-secondary btn-lg">Remove this Home</button></a>
-    
+        <a href="{{ url_for('remove', address=h.address) }}"><button style="margin-bottom: 20px; margin-left: 20px;" type="button" class="btn btn-secondary btn-lg">Remove this Home</button></a>
+        {% if not h.dashed_pin=='not available' %}
+        <a href="{{ url_for('home_single', id=h.id) }}"><button style="margin-bottom: 20px; margin-left: 20px;"
+                type="button" class="btn btn-secondary btn-lg">Add/Update Estimated Payment</button></a>
+        {% else %}
+        {% endif %}
     </div>
     {% endfor %}
 </div>
 <div>
-    <a href="{{ url_for('add') }}"><button style="margin-top: 20px;" type="button"
+    <a href="{{ url_for('add') }}"><button style="margin-top: 20px; margin-bottom: 20px;" type="button"
             class="btn btn-secondary btn-lg">Add a New Home</button></a>
 </div>
 
