@@ -5,15 +5,11 @@ from app.models import User, Property
 from app.map import create_map
 from app.taxes import property_characteristics
 from app.calculator import get_payment
-from app.mail import send_mail
 import time
-import requests
-import hashlib
 
 
 @app.route('/')
 def home():
-    # print(current_user.is_anonymous)
     return render_template('home.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -157,32 +153,6 @@ def home_single(id):
 
 
 
-# @app.route('/property/<id>')
-# def home_single(id):
-#     property = Property.query.filter_by(id=id).filter_by(user_id=current_user.id)
-#     print(property)
-#     collection = [] 
-#     for p in property:
-#             property_dict = {
-#             'id': p.id,
-#             'address': p.address,    
-#             'nickname': p.nickname,
-#             'bedrooms': p.bedrooms,
-#             'bathrooms': p.bathrooms,
-#             'impressions': p.impressions,
-#             'pin': p.pin,
-#             'dashed_pin': p.dashed_pin,
-#             'taxes': p.taxes,
-#             }
-#             collection.append(property_dict)
-#     context = {
-#         'property': collection
-#     }
-#     return render_template('property.html', **context)
-
-
-
-
 @app.route('/calculator/<taxes>/<id>', methods=['GET', 'POST'])
 def calculator(taxes, id):
     id=id
@@ -196,11 +166,11 @@ def calculator(taxes, id):
             rate = float(request.form.get('rate'))/100
             term = float(request.form.get('term'))
             dues = float((request.form.get('dues')).replace(',',''))
-            print(term)
+            # print(term)
             taxes = float(taxes)
-            print(taxes)
+            # print(taxes)
             monthly_payment = round(get_payment(principal, rate, term, dues, taxes), 2)
-            print (monthly_payment)
+            # print (monthly_payment)
             context = {
                 'payment': monthly_payment 
             }
@@ -212,4 +182,3 @@ def calculator(taxes, id):
         except:
             flash('error - please try again', 'warning')
             return redirect(request.referrer)
-    # return render_template('property.html')

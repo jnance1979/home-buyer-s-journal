@@ -15,7 +15,7 @@
 
 {% block content %}
 
-<div class="col-6">
+<div class="col-sm-8 col-md-6">
 <form action="{{ url_for('add') }}" method="POST">
     <div class="form-group">
         <label for="exampleFormControlInput1">Address</label>
@@ -55,23 +55,8 @@
         <label for="exampleFormControlTextarea1">Impressions</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="impressions"></textarea>
     </div>
-    <!-- <input type="submit" class="fadeIn fourth" value="Submit"> -->
     <button type="submit" class="btn btn-secondary btn-lg"> Submit </button>
 </form>
 </div>
 
-<!-- 
-<div class="col-6">
-    <div id="formContent">
-
-        <form action="{{ url_for('register') }}" method="POST">
-            <input type="name" id="login" class="fadeIn second" name="name" placeholder="name">
-            <input type="email" id="login" class="fadeIn second" name="email" placeholder="e-mail">
-            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-            <input type="password" id="password" class="fadeIn third" name="password2" placeholder="confirm password">
-            <input type="submit" class="fadeIn fourth" value="Register">
-        </form>
-
-    </div>
-</div> -->
 {% endblock %}

@@ -24,9 +24,8 @@
 <hr> -->
 
 <div class="row">
-
     {% for h in homes %}
-    <div class="card col-3">
+    <div class="card col-md-5 col-lg-3">
         <h4 style="text-align:center" class="card-title">{{ h.address }}</h4>
         <div class="card-body">
             <p class="card-text">{{ h.description }}</p>
@@ -37,17 +36,24 @@
             <p class="card-text">Cook County Property Pin: {{ h.dashed_pin }}</p>
             <p class="card-text">Estimated Annual Property Taxes: ${{ h.taxes }}</p>
             <p class="card-text">Estimated Monthly Payment: ${{ h.payment }}</p>
+            {% if not h.pin=='not available' %}
             <a href="https://www.cookcountyassessor.com/pin/{{ h.pin }}" target="_blank">Click for property details.</a>
+            {% else %}
+            {% endif %}
         </div>
-        <a href="{{ url_for('remove', address=h.address) }}"><button style="margin-bottom: 20px; margin-left: 20px;" type="button" class="btn btn-secondary btn-lg">Remove this Home</button></a>
-        {% if not h.dashed_pin=='not available' %}
-        <a href="{{ url_for('home_single', id=h.id) }}"><button style="margin-bottom: 20px; margin-left: 20px;"
-                type="button" class="btn btn-secondary btn-lg">Add/Update Estimated Payment</button></a>
-        {% else %}
-        {% endif %}
+        <div class="card-buttons">
+            <a href="{{ url_for('remove', address=h.address) }}"><button style="margin-bottom: 20px;" type="button" class="btn btn-secondary btn-md">Remove this Home</button></a>
+            {% if not h.dashed_pin=='not available' %}
+            <a href="{{ url_for('home_single', id=h.id) }}"><button style="margin-bottom: 20px;"
+                    type="button" class="btn btn-success btn-md">Add/Update Estimated Payment</button></a>
+            
+            {% else %}
+            {% endif %}
+            </div>
     </div>
     {% endfor %}
 </div>
+
 <div>
     <a href="{{ url_for('add') }}"><button style="margin-top: 20px; margin-bottom: 20px;" type="button"
             class="btn btn-secondary btn-lg">Add a New Home</button></a>

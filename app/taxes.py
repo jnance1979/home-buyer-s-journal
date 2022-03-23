@@ -19,8 +19,6 @@ def property_characteristics(user_address):
     condo = False
     
     if data['status'] == 'OK':
-        print(data)
-        geometry = data['results'][0]['geometry']['location']
         if data['results'][0]['address_components'][0]['types'] == ['subpremise']:
             condo = True
             num = data['results'][0]['address_components'][1]['short_name']
@@ -28,57 +26,40 @@ def property_characteristics(user_address):
             start_unit = data['results'][0]['address_components'][0]['short_name']
             split_unit = start_unit.split(' ')
             unit = (split_unit[-1]).upper()
-            print(split_unit)
-            print(unit)
         else:
             num = data['results'][0]['address_components'][0]['short_name']
             street = (data['results'][0]['address_components'][1]['short_name']).upper()
-
-        lat = geometry['lat']
-        lon = geometry['lng']
-        print(num)
-        print(street)
 
     else:
         return False
     
 
-        #https://data.cityofchicago.org/resource/tt4n-kn4t.json?$where=starts_with(job_titles, 'CHIEF')
-        #https://datacatalog.cookcountyil.gov/resource/bcnq-qi2z.json?centroid_x=-88.139620888932
     def get_pin():
-        # ad = '5949 N HERMITAGE AVE'
-        # unit = '315'        
-        #base_url = f'https://datacatalog.cookcountyil.gov/resource/c49d-89sn.json?$where=latitude>{lat - .00007} AND latitude<{lat + .00007} AND longitude<{lon + .00007} AND longitude>{lon - .00007}'
-        #base_url = f"https://datacatalog.cookcountyil.gov/resource/c49d-89sn.json?property_address={ad}&property_apt_no={unit}"
         if condo:
             base_url = f"https://datacatalog.cookcountyil.gov/resource/c49d-89sn.json?property_address={num} {street}&property_apt_no={unit}"
         else:
             base_url = f"https://datacatalog.cookcountyil.gov/resource/c49d-89sn.json?property_address={num} {street}"
-            # base_url = f"https://datacatalog.cookcountyil.gov/resource/c49d-89sn.json?$where=starts_with(property_address, '{num}')"
-        #base_url = f"https://datacatalog.cookcountyil.gov/resource/c49d-89sn.json?pin=14333100781008"
         try:
             response = requests.get(base_url, None)
             prop = response.json()
-            # print(prop)
             if prop:
                 pin = prop[0]['pin']
                 d_pin='-'.join([pin[:2], pin[2:4], pin[4:7], pin[7:10], pin[10:]])
                 both = [pin, d_pin]
                 
             else:
-                pin = '17162160090000'
+                pin = 'not available'
                 d_pin = 'not available'
                 both = [pin, d_pin]                
             return both
         except:
-            pin = '17162160090000'
+            pin = 'not available'
             d_pin = 'not available'
             both = [pin, d_pin]
             return both
     both_pins = get_pin()
 
     def get_taxes(d_pin):
-        print(d_pin)
         # test_pin = '17-08-124-035-1011'
         base_url = f'https://datacatalog.cookcountyil.gov/resource/tnes-dgyi.json?pin={d_pin}&year=2019'
         try:

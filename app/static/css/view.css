@@ -4,6 +4,13 @@ body {
     background-repeat: repeat;
 }
 
+.card {
+    background-image: url("/static/lined-paper.jpg");
+    background-size: 100%, 100%;
+    background-repeat: repeat;
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
 
 .heading {
     font-family: 'Arial';
@@ -11,12 +18,6 @@ body {
     margin-bottom: 25px;
     margin-top: 15px;
     color: white;
-    text-shadow: 1px 0px 20px #f5bc72;
-    -webkit-transition: 1s linear 0s;
-    -moz-transition: 1s linear 0s;
-    -o-transition: 1s linear 0s;
-    transition: 1s linear 0s;
-    outline: 0 none;
 }
 
 .card-title {
@@ -26,4 +27,10 @@ body {
 
 .card-body {
     padding-top: 0px;
+}
+
+.card-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }

@@ -27,21 +27,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
-                <!-- <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li> -->
-                    <!-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownId">
-                            <a class="dropdown-item" href="#">Action 1</a>
-                            <a class="dropdown-item" href="#">Action 2</a>
-                        </div>
-                    </li> -->
                 </ul>
     <ul class="navbar-nav ml-auto">
         {% if not current_user.is_authenticated %}
@@ -62,7 +47,7 @@
         {% with messages = get_flashed_messages( with_categories=true ) %}
         {% if messages %}
         {% for c, m in messages %}
-        <div class="col-6 alert alert-{{ c }} alert-dismissible fade show" role="alert">
+        <div class="col-sm-10 col-md-6 col-lg-4 alert alert-{{ c }} alert-dismissible fade show" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

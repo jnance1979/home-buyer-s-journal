@@ -1,6 +1,6 @@
 body {
     background-image: url("/static/coffee-journal.jpg");
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: 100%, 100%;
 }
 

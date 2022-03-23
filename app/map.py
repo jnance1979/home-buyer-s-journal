@@ -1,16 +1,8 @@
-from urllib import response
 import requests
 import pandas as pd
-import time
-# import numpy as np
-# from sodapy import Socrata
-# import geocoder
 import folium
 import os
-# user_address = input('Enter the address >')
 
-##################################################################
-# df = pd.read_csv('./Crimes_-_One_year_prior_to_present.csv')
 def create_map(user_address):
 
     API_KEY = os.getenv('API_KEY')
@@ -173,17 +165,3 @@ def create_map(user_address):
     this_map.fit_bounds(this_map.get_bounds())
 
     this_map.save( 'app/templates/map_output.html' )
-
-
-
-
-
-    # print(f'Crimes occurring within a 1 block area:\n')
-    # print(chi_df.sort_values(by=['latitude'], ascending=False))
-    # print(f'\n Divvy Stations within a 1 kilometer area:\n')
-    # print(div_df.head())
-    # time.sleep( 2 )
-    # base_url = f"https://maps.googleapis.com/maps/api/streetview?size=400x400&location={lat},{lon}&fov=80&heading=70&pitch=0&key={API_KEY}"
-    # response = requests.get(base_url, None)
-    # pic = response.json()
-    # pic.save('app/templates/map_output.html')
