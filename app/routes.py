@@ -8,11 +8,11 @@ from app.calculator import get_payment
 import time
 
 
-@app.route('/')
+@app.route('/')                                 # home route
 def home():
     return render_template('home.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])       # log in route
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
@@ -27,7 +27,7 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])    # register new user route
 def register():
     if request.method == 'POST':
         data = request.form
@@ -52,14 +52,14 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/logout')
+@app.route('/logout')                       # log out route
 def logout():
     logout_user()
     flash('successfully logged out', 'primary')
     return render_template('home.html')
   
 
-@app.route('/add', methods=['GET', 'POST'])
+@app.route('/add', methods=['GET', 'POST'])     # add new home to journal route
 def add():
     if request.method == 'POST':
         address = request.form.get('address')
@@ -89,7 +89,7 @@ def add():
     return render_template('add_home.html')
 
 
-@app.route('/view')
+@app.route('/view')                 # view homes in journal route
 def view():
     homes = Property.query.filter_by(user_id=current_user.id).all()
     collection = [] 
@@ -113,7 +113,7 @@ def view():
     return render_template('view.html', **context)
 
 
-@app.route('/view/remove/<address>')
+@app.route('/view/remove/<address>')        # remove home from journal route
 def remove(address):
     home_to_remove = Property.query.filter_by(address=address).filter_by(user_id=current_user.id).first()
     db.session.delete(home_to_remove)
@@ -122,7 +122,7 @@ def remove(address):
     return redirect(request.referrer) 
 
 
-@app.route('/map_request', methods=['GET', 'POST'])
+@app.route('/map_request', methods=['GET', 'POST'])     # create map route
 def map():
     if request.method == 'POST':
         address = request.form.get('address')
@@ -134,7 +134,7 @@ def map():
             return render_template('final_map.html')
     return render_template('map_request.html')
 
-@app.route('/property/<id>', methods=['GET', 'POST'])
+@app.route('/property/<id>', methods=['GET', 'POST'])       # input data for mortgage calculator route
 def home_single(id):
     p = Property.query.filter_by(id=id).filter_by(user_id=current_user.id).first()
     print(p.id)
@@ -153,7 +153,7 @@ def home_single(id):
 
 
 
-@app.route('/calculator/<taxes>/<id>', methods=['GET', 'POST'])
+@app.route('/calculator/<taxes>/<id>', methods=['GET', 'POST'])     # determine monthly payment route
 def calculator(taxes, id):
     id=id
     taxes=taxes
@@ -182,3 +182,7 @@ def calculator(taxes, id):
         except:
             flash('error - please try again', 'warning')
             return redirect(request.referrer)
+
+@app.route('/about')                                 # about route
+def about():
+    return render_template('about.html')

@@ -26,18 +26,20 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <a class="navbar-brand" href="{{ url_for('about') }}">About</a>
+
             <div class="collapse navbar-collapse" id="collapsibleNavId">
-                </ul>
-    <ul class="navbar-nav ml-auto">
-        {% if not current_user.is_authenticated %}
-        <li class="nav-item"><a href="{{  url_for('login') }}" class="nav-link">login</a></li>
-        <li class="nav-item"><a href="{{  url_for('register') }}" class="nav-link">register</a></li>
-        {% else %}
-        <li class="nav-item"><a href="{{  url_for('logout') }}" class="nav-link">logout</a></li>
-        <li class="nav-item"><a href="{{  url_for('view') }}" class="nav-link">my journal</a></li>
-        {% endif %}
-    </ul>
-    </div>
+                
+            <ul class="navbar-nav ml-auto">
+                {% if not current_user.is_authenticated %}
+                <li class="nav-item"><a href="{{  url_for('login') }}" class="nav-link">login</a></li>
+                <li class="nav-item"><a href="{{  url_for('register') }}" class="nav-link">register</a></li>
+                {% else %}
+                <li class="nav-item"><a href="{{  url_for('logout') }}" class="nav-link">logout</a></li>
+                <li class="nav-item"><a href="{{  url_for('view') }}" class="nav-link">my journal</a></li>
+                {% endif %}
+            </ul>
+        </div>
     </nav>
     </header>
             {% block header %}

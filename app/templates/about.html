@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+        {% block title %}
+        <title>About</title>
+        {% endblock %}
+
+{% block content %}
+<h1>About</h1>
+
+
+<div class="card">
+    <h5 class="card-header">Purpose</h5>
+    <div class="card-body">
+        <p class="card-text"> - This site is intended for people who are shopping for homes in Chicago in order to track and 
+            compare properties they have seen (or wish to see).</p>
+    </div>
+</div>
+<div class="card">
+    <h5 class="card-header">Data Sources</h5>
+    <div class="card-body">
+        <p class="card-text"> - All data related to properties or other mapped elements is taken from publicly available data portals that are
+        maintained by the city of Chicago and/or Cook County. They can be accessed here: 
+        <a href="https://data.cityofchicago.org/" target="_blank">Chicago Data Portal</a> | 
+        <a href="https://datacatalog.cookcountyil.gov/" target="_blank">Cook County Open Data</a></p>
+    </div>
+</div>
+<div class="card">
+    <h5 class="card-header">Estimated Taxes/Payments</h5>
+    <div class="card-body">
+        <p class="card-text"> - Property tax estimates are currently based on 2019 Board of Review final assessment amounts. This is due to the fact
+        that assessments in many areas were lowered in 2020 for the purpose of Covid-19 relief and can be expected to return to
+        something approaching or surpassing 2019 levels for 2021.<br>
+         - The assessment amount is multiplied by the 2021 Illinois state equalization factor (currently 3.2234 - the highest since 2010 as
+        a response to current inflation) and the most recent (2020) average property tax rate across Chicago (6.911%). A tax
+        estimate for properties outside the city limits (but still within Cook County) might be considerably higher given the average
+        rates in those areas (North/Northwest Suburbs: 9.048% and South/Southwest Suburbs: 11.822%). For instance, a property
+        owner in the suburbs could reasonably expect to pay 30-70% more in annual taxes than a property owner in the city with similarly
+        valued property. Reference here: 
+        <a href="https://www.cookcountyclerkil.gov/sites/default/files/publications/2020_Tax_Rate_Report_Web.pdf" target="_blank">Cook County Average Taxes Rates</a>
+        <br> - While pains are taken to seek accuracy in these amounts, all 2021/2022 data is not yet available, and all
+        estimates should be considered exactly that - estimates.</p>
+    </div>
+</div>
+<div class="card">
+    <h5 class="card-header">Mortgage Calculator</h5>
+    <div class="card-body">
+        <p class="card-text"> - The built-in feature of this site which allows the user to estimate a monthly mortgage payment is only made available to
+        those properties for which reliable data could be obtained from the Cook County Assessor's Office. In the event that no data
+        was available, many mortgage calculators are available online, but a user would have to factor in his/her own HOA and tax estimates to
+        get a complete payment picture. <br>Example here: 
+        <a href="https://www.zillow.com/mortgage-calculator/" target="_blank">Zillow Mortgage Calculator</a></p>
+    </div>
+</div>
+<div style="margin-bottom: 20px;" class="card">
+    <h5 class="card-header">Disclaimer</h5>
+    <div class="card-body" >
+        <p class="card-text"> - Cook County property data on which this site is based is sometimes missing or incomplete from the public databases. 
+            In the event that data cannot be retrieved for a property here, it may be obtainable via more specific web searches or by contacting the 
+            county directly.
+        </p>
+    </div>
+</div>
+
+{% endblock %}
